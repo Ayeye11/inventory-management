@@ -2,6 +2,7 @@ package urls
 
 //inventory-management
 const (
+	Home string = "/home"
 	//inventory
 	Inventory string = "/inventory"
 	//products

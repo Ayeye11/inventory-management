@@ -2,6 +2,7 @@ package server
 
 import (
 	"fmt"
+	"inventory-management/internal/api/router/middlewares"
 	"net/http"
 	"os"
 )
@@ -15,8 +16,8 @@ func InitServer() {
 	}
 	server := http.Server{
 		Addr:    addr,
-		Handler: Api,
+		Handler: middlewares.ChainMiddlewares(Api, middlewares.Middlewares...),
 	}
-	fmt.Printf("Server listen on %s", server.Addr)
+	fmt.Printf("Server listen on %s\n", server.Addr)
 	server.ListenAndServe()
 }

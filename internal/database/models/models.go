@@ -32,7 +32,7 @@ type Supplier struct {
 
 type StockMovement struct {
 	gorm.Model
-	Type      string    `gorm:"size:10;not null"`
+	IsEntry   bool      `gorm:"not null"`
 	Amount    int       `gorm:"not null"`
 	Date      time.Time `gorm:"not null;default:CURRENT_TIMESTAMP"`
 	ProductID uint      `gorm:"not null"`
