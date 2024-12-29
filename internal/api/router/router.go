@@ -12,8 +12,7 @@ func InitRouter() {
 
 //products
 
-//notFound
-
+// notFound
 func notFound() {
 	server.Api.HandleFunc("/", handlers.UseNotFound)
 }
