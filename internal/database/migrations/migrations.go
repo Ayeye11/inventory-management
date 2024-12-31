@@ -7,7 +7,7 @@ import (
 )
 
 func Migrate() {
-	err := database.Db.AutoMigrate(&models.Product{}, &models.StockMovement{})
+	err := database.Db.AutoMigrate(&models.Product{}, &models.StockMovement{}, &models.User{})
 	if err != nil {
 		log.Fatal(err)
 	}

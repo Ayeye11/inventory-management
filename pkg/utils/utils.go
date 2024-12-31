@@ -29,3 +29,7 @@ func WriteError(w http.ResponseWriter, status int, err error) error {
 func WriteMessage(w http.ResponseWriter, status int, message string) error {
 	return WriteJson(w, status, map[string]string{"message": message})
 }
+
+func SendToken(w http.ResponseWriter, status int, token string) error {
+	return WriteJson(w, status, map[string]string{"token": token})
+}

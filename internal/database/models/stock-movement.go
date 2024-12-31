@@ -3,7 +3,20 @@ package models
 import (
 	"fmt"
 	"inventory-management/internal/database"
+	"time"
+
+	"gorm.io/gorm"
 )
+
+type StockMovement struct {
+	gorm.Model
+	IsEntry   bool      `gorm:"not null"`
+	Amount    int       `gorm:"not null"`
+	Date      time.Time `gorm:"type:date;not null;default:CURRENT_DATE"`
+	ProductID uint      `gorm:"not null"`
+
+	Product Product `gorm:"foreignKey:ProductID;references:ID"`
+}
 
 func (sm *StockMovement) NewMovement() error {
 	var p Product
@@ -25,12 +38,4 @@ func (sm *StockMovement) NewMovement() error {
 		return fmt.Errorf("internal server error")
 	}
 	return nil
-}
-
-func GetMovementById(id int) (any, error) {
-	var sm StockMovement
-	if err := database.Db.First(&sm, id).Error; err != nil {
-		return nil, fmt.Errorf("product doesn't exist")
-	}
-	return sm, nil
 }

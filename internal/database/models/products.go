@@ -3,7 +3,17 @@ package models
 import (
 	"fmt"
 	"inventory-management/internal/database"
+
+	"gorm.io/gorm"
 )
+
+type Product struct {
+	gorm.Model
+	Name        string  `gorm:"unique;size:255;not null"`
+	Description string  `gorm:"size:500;not null"`
+	Price       float64 `gorm:"not null"`
+	Quantity    int     `gorm:"not null;default:0"`
+}
 
 func (p *Product) Add() error {
 	p.Quantity = 0

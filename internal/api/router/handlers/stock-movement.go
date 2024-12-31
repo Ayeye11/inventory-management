@@ -3,6 +3,7 @@ package handlers
 import (
 	"fmt"
 	"inventory-management/internal/database/models"
+	"inventory-management/internal/database/models/res"
 	"inventory-management/pkg/utils"
 	"net/http"
 	"strconv"
@@ -17,7 +18,7 @@ func GetMovementsId(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		utils.WriteError(w, http.StatusInternalServerError, err)
 	}
-	sm, err := models.GetMovementById(id)
+	sm, err := res.GetMovementById(id)
 	if err != nil {
 		utils.WriteError(w, http.StatusInternalServerError, err)
 	}

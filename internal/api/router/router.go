@@ -8,17 +8,27 @@ import (
 
 func InitRouter() {
 	home()
+	login()
 	inventory()
 	products()
 	StockMovement()
 	notFound()
 }
 
-//handlers
+//public
 
 func home() {
 	server.Api.HandleFunc("GET "+urls.Home, handlers.GetHome)
 }
+
+func login() {
+	server.Api.HandleFunc("GET "+urls.Auth_register, handlers.GetRegister)
+	server.Api.HandleFunc("POST "+urls.Auth_register, handlers.PostRegister)
+	server.Api.HandleFunc("GET "+urls.Auth_login, handlers.GetLogin)
+	server.Api.HandleFunc("POST "+urls.Auth_login, handlers.PostLogin)
+}
+
+//private
 
 func inventory() {
 	server.Api.HandleFunc("POST "+urls.Inventory, handlers.GetInventory)
