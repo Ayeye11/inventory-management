@@ -33,24 +33,3 @@ func (p *Product) Delete(id int) error {
 	}
 	return nil
 }
-
-func (a *Product) NewMovement(v StockMovement) error {
-	if err := database.Db.First(a, v.ProductID).Error; err != nil {
-		return fmt.Errorf("product doesn't exist")
-	}
-	if !v.IsEntry {
-		if a.Quantity < v.Amount {
-			return fmt.Errorf("not enough stock")
-		}
-		a.Quantity -= v.Amount
-	} else {
-		a.Quantity += v.Amount
-	}
-	if err := database.Db.Save(a).Error; err != nil {
-		return fmt.Errorf("internal server error")
-	}
-	if err := database.Db.Create(&v).Error; err != nil {
-		return fmt.Errorf("internal server error")
-	}
-	return nil
-}
