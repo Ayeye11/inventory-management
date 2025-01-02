@@ -11,6 +11,7 @@ type Middleware func(http.Handler) http.Handler
 var Middlewares = []Middleware{
 	redirectHome,
 	logRequest,
+	AuthMiddleware,
 }
 
 func ChainMiddlewares(handler http.Handler, middlewares ...Middleware) http.Handler {
